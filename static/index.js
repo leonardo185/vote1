@@ -11,18 +11,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
       button.onclick = ()=>{
         const selection = button.dataset.vote;
         socket.emit('submit vote',{'selection':selection});
-      }
+      };
     });
   });
 
   //When a vote is announced, add to the counter.
   socket.on('vote totals', data=>{
-    //Update the value of votes in the client side.
-    documnet.querySelector('#yes').innerHTML = data.yes;
-    documnet.querySelector('#no').innerHTML = data.no;
-    documnet.querySelector('#maybe').innerHTML = data.maybe;
-  });
-
-
+        document.querySelector('#yes').innerHTML = data.yes;
+        document.querySelector('#no').innerHTML = data.no;
+        document.querySelector('#maybe').innerHTML = data.maybe;
+    });
 
 });

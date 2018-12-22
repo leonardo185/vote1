@@ -8,9 +8,11 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
+votes = {"yes": 0, "no": 0, "maybe": 0 }
+
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('index.html', votes=votes)
 
 #Get the value of votes from the client.
 @socketio.on("submit vote")
