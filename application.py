@@ -11,3 +11,14 @@ socketio = SocketIO(app)
 @app.route("/")
 def index():
     return render_template('index.html')
+
+#Get the value of votes from the client.
+@socketio.on("submit vote")
+def vote(data):
+    selection = data['selection']
+
+    #update the value of votes.
+    votes[selection] += 1
+
+    #Send the value of the votes to the client.
+    emit('vote totals', votes, broadcat=True)
